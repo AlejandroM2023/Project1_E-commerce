@@ -23,7 +23,7 @@ function addCards (){
     })
     .then(function(data){
         for(let item of data){
-
+          
           //create elements for product cards
           const colDiv = document.createElement('div');
           const cardDiv = document.createElement('div');
@@ -33,7 +33,7 @@ function addCards (){
 
           //add materialize classes to div for styling
           colDiv.setAttribute('class','col s12 m6');
-          cardDiv.setAttribute('class','card');
+          cardDiv.setAttribute('class','card large');
           cardImage.setAttribute('class','card-image');
           cardContentDiv.setAttribute('class','card-content');
           actionDiv.setAttribute('class','card-action')
@@ -44,6 +44,7 @@ function addCards (){
           const productName = document.createElement('span');
           const productPrice = document.createElement('p');
 
+    
           //class for title
           productName.setAttribute('class','card-title');
 
@@ -54,11 +55,10 @@ function addCards (){
           
           //add id to price p tag for access in convert currency
           productPrice.setAttribute('id','price');
-          
-          
 
+          //for accesing category
+          colDiv.setAttribute('data-category',item.category);
           
-
           //append divs in order
           colDiv.appendChild(cardDiv);
           cardDiv.appendChild(cardImage);
@@ -74,6 +74,9 @@ function addCards (){
 
           //append to card display
           displayArea.appendChild(colDiv);
+
+          //add to card array
+          cardsArr.push(colDiv);
 
 
         }
