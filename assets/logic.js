@@ -8,6 +8,7 @@ const currencySlct = document.querySelector('select');
 const ctgr1 = document.querySelector('#category1');
 const ctgr2 = document.querySelector('#category2');
 const ctgr3 = document.querySelector('#category3');
+const ctgr4 = document.querySelector('#category4');
 
 //array for adding cards and converting currency
 const cardsArr = [];
@@ -84,8 +85,14 @@ function addCards (){
   
 };
 
-function sortCategory(){
-
+function sortCategory(event){
+  displayCards.innerHTML='';
+  console.log(event);
+  for (let item of cardsArr){
+  if (item.getAttribute('data-category') == event.target.getAttribute('data-category')){
+    displayCards.appendChild(item); 
+  }
+}
 };
 
 
@@ -110,20 +117,20 @@ window.onload=function load (){
     convertCurrency();
   });
 //event listener categories
-  ctgr1.addEventListener('click',function(){
-    sortCategory();
-  });
-  ctgr2.addEventListener('click',function (){
-    sortCategory();
-  });
-  ctgr3.addEventListener('click',function (){
-    sortCategory();
-  });
+  ctgr1.addEventListener('click',
+    sortCategory
+  );
+  ctgr2.addEventListener('click',
+    sortCategory
+  );
+  ctgr3.addEventListener('click',
+    sortCategory
+  );  
+  ctgr4.addEventListener('click',
+    sortCategory
+  );
+  
 //addcards
-
-
-
-
 };
 
 
