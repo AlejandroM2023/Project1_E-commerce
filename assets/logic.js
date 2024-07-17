@@ -98,9 +98,26 @@ function sortCategory(event){
 
 
 //converting currency
-function convertCurrency (){
+async function fetchConversion(formCurrency, toCurrency, amount) {
+  const url = 'https://currency-converter5.p.rapidapi.com/currency/convert?format=json&from=AUD&to=CAD&amount=1&language=en';
+  const options = {
+    method: 'GET',
+    headers: {
+      'x-rapidapi-key': '3be8c18d27msh23a18245b829566p1e9860jsn17e38541da51',
+      'x-rapidapi-host': 'currency-converter5.p.rapidapi.com'
+    }
+  };
+  
+  try {
+    const response = await fetch(url, options);
+    const result = await response.text();
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+}
+//functions to load as soon as page loads 
 
-};
 
 //functions to load as soon as page loads 
 window.onload=function load (){
