@@ -3,7 +3,7 @@
 //add button
 const addBtn = document.querySelector('#addBtn');
 //currency selector 
-const currencySlct = document.querySelector('selector');
+const currencySlct = document.querySelector('select');
 //catergory selectors
 const ctgr1 = document.querySelector('#category1');
 const ctgr2 = document.querySelector('#category2');
@@ -30,17 +30,36 @@ function convertCurrency (){
 
 };
 
-
 //functions to load as soon as page loads 
 window.onload=function load (){
   
-  //event listners currency,addbtn,category
-  
+//event listners addbtn
+  addBtn.addEventListener('click',function(){
+    addCards();
+  });
+//event listener change currency
+  currencySlct.addEventListener('change',function(e){
+    console.log(e.target.value);
+    convertCurrency();
+  });
+//event listener categories
+  ctgr1.addEventListener('click',function(){
+    sortCategory();
+  });
+  ctgr2.addEventListener('click',function (){
+    sortCategory();
+  });
+  ctgr3.addEventListener('click',function (){
+    sortCategory();
+  });
+//addcards
 
-  //addcards
 
 
-};
+
+
+    }
+;
 
 
 
