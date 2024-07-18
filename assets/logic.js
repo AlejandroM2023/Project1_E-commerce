@@ -1,9 +1,8 @@
 //global variables
 
-
 //add button
 const addBtn = document.querySelector('#addBtn');
-//currency selector
+//currency selector 
 const currencySlct = document.querySelector('select');
 //catergory selectors
 const ctgr1 = document.querySelector('#category1');
@@ -11,12 +10,10 @@ const ctgr2 = document.querySelector('#category2');
 const ctgr3 = document.querySelector('#category3');
 const ctgr4 = document.querySelector('#category4');
 
-
 //array for adding cards and converting currency
 const cardsArr = [];
 let allProducts;
 let numItems =5;
-
 
 async function getAllProducts() {
   try {
@@ -28,19 +25,17 @@ async function getAllProducts() {
   }
 }
 
-
 //build cards here
 async function addCards (){
   const displayArea = document.querySelector('#displayCards');
-  for(let i = numItems-5; i<numItems; i++){
-         
+  for(let i = 0; i<20; i++){
+          
   //create elements for product cards
     const colDiv = document.createElement('div');
     const cardDiv = document.createElement('div');
     const cardContentDiv = document.createElement('div');
     const actionDiv = document.createElement('div');
     const cardImage = document.createElement('div');
-
 
     //add materialize classes to div for styling
     colDiv.setAttribute('class','col s12 m6');
@@ -50,42 +45,34 @@ async function addCards (){
     actionDiv.setAttribute('class','card-action')
 
 
-
-
     //info tags
     const productImg = document.createElement('img');
     const productName = document.createElement('span');
     const productPrice = document.createElement('p');
 
 
-
-
     //class for title
     productName.setAttribute('class','card-title');
-
 
     //add values to elements
     productImg.src = allProducts[i].image;
     productName.textContent = allProducts[i].title;
     productPrice.textContent = allProducts[i].price;
 
-
     //image sizing
     productImg.setAttribute('class','image-size');
-   
+    
     //add id to price p tag for access in convert currency
     productPrice.setAttribute('id','price');
 
-
     //for accesing category
     colDiv.setAttribute('data-category',allProducts[i].category);
-   
+    
     //append divs in order
     colDiv.appendChild(cardDiv);
     cardDiv.appendChild(cardImage);
     cardDiv.appendChild(cardContentDiv);
     cardDiv.appendChild(actionDiv);
-
 
     //append information
     cardImage.appendChild(productImg);
@@ -93,38 +80,34 @@ async function addCards (){
     cardContentDiv.appendChild(productPrice);
 
 
-
-
-
-
-    //append to card display
-    displayArea.appendChild(colDiv);
-
-
     //add to card array
     cardsArr.push(colDiv);
 
 
-
-
   }
-  numItems +=5;
+  displayCards();
 }
- 
 
+function displayCards(){
+  const displayArea = document.querySelector('#displayCards');
+  for(let i= numItems-5;i<numItems;i++){
+    displayArea.appendChild(cardsArr[i]);
+  }
+  numItems+=5;
+
+}
+  
 
 function sortCategory(event){
-  displayCards.innerHTML='';
+  const displayArea = document.querySelector('#displayCards');
+  displayArea.innerHTML='';
   console.log(event);
   for (let item of cardsArr){
   if (item.getAttribute('data-category') == event.target.getAttribute('data-category')){
-    displayCards.appendChild(item);
+    displayArea.appendChild(item); 
   }
 }
 };
-
-
-
 
 
 
@@ -145,15 +128,13 @@ async function fetchConversionRate(fromCurrency, toCurrency) {
     return 1; // Default to 1 if there's an error
   }
 }
-//functions to load as soon as page loads
+//functions to load as soon as page loads 
 
 
-
-
-//functions to load as soon as page loads
+//functions to load as soon as page loads 
 window.onload=function load (){
   getAllProducts();
- 
+  
 //event listners addbtn
   addBtn.addEventListener('click',function(){
     addCards();
@@ -176,16 +157,8 @@ window.onload=function load (){
   ctgr4.addEventListener('click',
     sortCategory
   );
- 
+  
 //addcards
 };
-const cartbtnEl = document.querySelector('#checkout');
 
-//cart button --> takes them to cart.html page
-window.onload = function load (){
-  cartbtnEl.addEventListener('click', function(){
-    window.location.href='cart.html'
-  });
-};
-//add buttons to cards 
-//add local storage to store items for the cart 
+
