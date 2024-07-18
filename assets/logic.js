@@ -179,3 +179,5 @@ window.onload=function load (){
  
 //addcards
 };
+//add buttons to cards 
+//add local storage to store items for the cart 
