@@ -179,5 +179,13 @@ window.onload=function load (){
  
 //addcards
 };
+const cartbtnEl = document.querySelector('#checkout');
+
+//cart button --> takes them to cart.html page
+window.onload = function load (){
+  cartbtnEl.addEventListener('click', function(){
+    window.location.href='cart.html'
+  });
+};
 //add buttons to cards 
 //add local storage to store items for the cart 
