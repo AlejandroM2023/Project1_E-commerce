@@ -1,48 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="description" content ="My first website">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/style.css"> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="./assets/style.css"> 
-    <title>ECommerce</title>
-  </head>
-  <body>
-    <header>
-      <nav>
-        <div class="nav-wrapper">
-          <a href="#" class="brand-logo right">WAMA Store</a>
-          <ul id="nav-mobile" class="left hide-on-med-and-down">
-            <li><a data-category="men's clothing"id='category1'>Men's Clothing</a></li>
-            <li><a data-category="women's clothing" id='category2'>Women's Clothing</a></li>
-            <li><a data-category="jewelry" id ='category3'>Jewelry</a></li>
-            <li><a data-category="electronics"id='category4'>Electronics</a></li>
-          </ul>
-        </div>
-        
-      </nav>
-      
-    </header>
-    <main class="container">
-      <label>Currency Select</label>
-      <select class="browser-default">
-        <option value="" disabled selected>Choose your currency</option>
-        <option value="1">USD $</option>
-        <option value="2">Currency 2</option>
-        <option value="3">Currency 3</option>
-      </select>
-      <div id="displayCards" class="row">
-        <!-- cards will generate here -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="My first website">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/style.css"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <title>ECommerce</title>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo right">WAMA Store</a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li><a data-category="men's clothing" id="category1">Men's Clothing</a></li>
+          <li><a data-category="women's clothing" id="category2">Women's Clothing</a></li>
+          <li><a data-category="jewelry" id="category3">Jewelry</a></li>
+          <li><a data-category="electronics" id="category4">Electronics</a></li>
+        </ul>
       </div>
-      <a id="addBtn" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
-    </main>
-    <footer>
-
-    </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="./assets/logic.js"></script>
-  </body>
+    </nav>
+  </header>
+  <main class="container">
+    <label for="currencySelect">Currency Select</label>
+    <select id="currencySelect" class="browser-default">
+      <option value="" disabled selected>Choose your currency</option>
+      <option value="USD">USD $</option>
+      <option value="EUR">EUR €</option>
+      <option value="GBP">GBP £</option>
+    </select>
+    <div id="displayCards" class="row">
+      <!-- Cards will generate here -->
+    </div>
+    <a id="addBtn" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+  </main>
+  <footer>
+    <!-- Footer content here -->
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="./assets/logic.js"></script>
+</body>
 </html>
