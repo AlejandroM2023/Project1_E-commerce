@@ -17,9 +17,11 @@ function deleteItem (e){
   
   if(e.target.getAttribute('id') == 'add-cart'){
     console.log(e.target);
-    //remove from local storage array
-    //remove from display
-    //updated local storage array 
+    //KEEP EVERYTHING INSIDE THE IF STATEMENT
+    //remove from local storage array - the array is initialized in line 1
+    //brin in display area - look at line 3
+    //remove from display - look up how to remove from parent elemenents
+    //updated local storage array - look at line 103 in logic.js file
   }};
 
 window.onload = function (){
