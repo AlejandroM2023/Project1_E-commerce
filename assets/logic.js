@@ -126,28 +126,45 @@ async function fetchConversionRate(fromCurrency,toCurrency,amount) {
 };
 
 try {
+  console.log(fromCurrency,toCurrency,amount);
 	const response = await fetch(url, options);
-	const result = await response.text();
-	console.log(result);
+	const result = await response.json();
+  let rate;
+  
+  if(toCurrency == 'JPY'){
+    rate = await result.rates.JPY.rate;
+  }else if(toCurrency == 'USD'){
+    rate = await result.rates.USD.rate;
+  }else {
+    rate = await result.rates.EUR.rate;
+  }
+  console.log(result,rate);
+	return rate;
+
 } catch (error) {
 	console.error(error);
 }
 }
 
 async function currencyConvert(event){
+  //query options for api
   const itemPrice = cardsArr[0].querySelector('#price').textContent;
   const fromC = cardsArr[0].querySelector('#price').getAttribute('data-currency');
   const toC = event.target.value;
-  const currencyInfo = await fetchConversionRate(fromC,toC,itemPrice);
-  const conversionRate = currencyInfo;
-  console.log(conversionRate);
-  /*for(let item of cardsArr ){
-   
-    console.log(currencyInfo);
-  }
-  */
-}
+  const rate = await fetchConversionRate(fromC,toC,itemPrice);
 
+  for(let item of cardsArr){
+    console.log(item.querySelector('#price').textContent);
+    console.log(rate);
+    const newPrice = Number(rate) * Number(item.querySelector('#price').textContent.split(" ")[0]);
+    console.log(newPrice);
+    item.querySelector('#price').textContent = newPrice + " " + event.target.value;
+    item.querySelector('#price').setAttribute('data-currency',event.target.value);
+  }
+  
+
+  
+}
 
 
 //display conversion
