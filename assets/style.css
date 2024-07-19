@@ -15,7 +15,7 @@ cardsArr.solid {border-style: solid;
     column-width: 10%;
     float: inline-start;
     float: left;
-    align-items: stretch;
+    align-items: center;
     text-align: center ;
         }
 .card-title {
