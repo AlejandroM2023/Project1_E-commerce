@@ -14,7 +14,7 @@ const ctgr4 = document.querySelector('#category4');
 const cardsArr = [];
 let allProducts;
 let numItems =5;
-
+//JSON version
 async function getAllProducts() {
   try {
     const response = await fetch('https://fakestoreapi.com/products');
@@ -36,13 +36,18 @@ async function addCards (){
     const cardContentDiv = document.createElement('div');
     const actionDiv = document.createElement('div');
     const cardImage = document.createElement('div');
+    let addtoCart = document.createElement('button');//creating a button for add to cart here
+   
+    
 
     //add materialize classes to div for styling
     colDiv.setAttribute('class','col s12 m6');
     cardDiv.setAttribute('class','card large');
     cardImage.setAttribute('class','card-image');
     cardContentDiv.setAttribute('class','card-content');
-    actionDiv.setAttribute('class','card-action')
+    actionDiv.setAttribute('class','card-action'); //action div here
+    addtoCart.setAttribute('id','add-cart');//adding id to addtoCart
+    // addtoCart.setAttribute('class','waves-effect'); can style this better
 
 
     //info tags
@@ -58,6 +63,7 @@ async function addCards (){
     productImg.src = allProducts[i].image;
     productName.textContent = allProducts[i].title;
     productPrice.textContent = allProducts[i].price;
+    addtoCart.textContent = 'Add to Cart';
 
     //image sizing
     productImg.setAttribute('class','image-size');
@@ -75,6 +81,8 @@ async function addCards (){
     cardDiv.appendChild(cardImage);
     cardDiv.appendChild(cardContentDiv);
     cardDiv.appendChild(actionDiv);
+    actionDiv.appendChild(addtoCart);
+     //addtocart append to action div
 
     //append information
     cardImage.appendChild(productImg);
@@ -84,7 +92,16 @@ async function addCards (){
 
     //add to card array
     cardsArr.push(colDiv);
-
+  //event listener for addtoCart button:
+  addtoCart.addEventListener('click',function (event){
+    let addedItem = JSON.parse(localStorage.getItem('addedItem'));
+    if (addedItem == null){
+      addedItem = [];
+    }
+    addedItem.push(event.target.parentElement.parentElement.outerHTML);//JSON doesn;t allow to string HTML elements, outerHTML gets the shell of the item we want to append. 
+    console.log(addedItem);
+    localStorage.setItem('addedItem',JSON.stringify(addedItem));
+});
 
   }
   displayCards();
@@ -197,4 +214,5 @@ window.onload=function load (){
 //addcards
 };
 
-
+//send cards array to local storage
+// localStorage.setItem('cardsArray',JSON.stringify(cardsArr));
