@@ -64,6 +64,8 @@ async function addCards (){
     
     //add id to price p tag for access in convert currency
     productPrice.setAttribute('id','price');
+    productPrice.setAttribute('data-currency','USD');
+
 
     //for accesing category
     colDiv.setAttribute('data-category',allProducts[i].category);
@@ -112,23 +114,43 @@ function sortCategory(event){
 
 
 //converting currency
-async function fetchConversionRate(fromCurrency, toCurrency) {
-  try {
-    const response = await fetch(`https://currency-converter5.p.rapidapi.com/currency/convert?format=json&from=${fromCurrency}&to=${toCurrency}&amount=1`, {
-      method: 'GET',
-      headers: {
-        'X-RapidAPI-Key': 'YOUR_RAPIDAPI_KEY', // Replace API key
-        'X-RapidAPI-Host': 'currency-converter5.p.rapidapi.com'
-      }
-    });
-    const data = await response.json();
-    return data.rates[toCurrency].rate;
-  } catch (error) {
-    console.error('Error fetching conversion rate:', error);
-    return 1; // Default to 1 if there's an error
-  }
+async function fetchConversionRate(fromCurrency,toCurrency,amount) {
+
+  const url = `https://currency-converter5.p.rapidapi.com/currency/convert?format=json&from=${fromCurrency}&to=${toCurrency}&amount=${amount}&language=en`;
+  const options = {
+	method: 'GET',
+	headers: {
+		'x-rapidapi-key': '8db156f28bmsh0a5ef060af93bd0p1a17f3jsn8536742e36b7',
+		'x-rapidapi-host': 'currency-converter5.p.rapidapi.com'
+	}
+};
+
+try {
+	const response = await fetch(url, options);
+	const result = await response.text();
+	console.log(result);
+} catch (error) {
+	console.error(error);
 }
-//functions to load as soon as page loads 
+}
+
+async function currencyConvert(event){
+  const itemPrice = cardsArr[0].querySelector('#price').textContent;
+  const fromC = cardsArr[0].querySelector('#price').getAttribute('data-currency');
+  const toC = event.target.value;
+  const currencyInfo = await fetchConversionRate(fromC,toC,itemPrice);
+  const conversionRate = currencyInfo;
+  console.log(conversionRate);
+  /*for(let item of cardsArr ){
+   
+    console.log(currencyInfo);
+  }
+  */
+}
+
+
+
+//display conversion
 
 
 //functions to load as soon as page loads 
@@ -140,10 +162,7 @@ window.onload=function load (){
     addCards();
   });
 //event listener change currency
-  currencySlct.addEventListener('change',function(e){
-    console.log(e.target.value);
-    convertCurrency();
-  });
+  currencySlct.addEventListener('change',currencyConvert);
 //event listener categories
   ctgr1.addEventListener('click',
     sortCategory
