@@ -23,7 +23,7 @@ function deleteItem (e){
     })
 
         .then(res=>res.json())
-        .then(data=>console.log(`Item removed:`, data));
+        .then(localStorage=>console.log(`Item removed:`, localStorage));
     };
     
     //KEEP EVERYTHING INSIDE THE IF STATEMENT
