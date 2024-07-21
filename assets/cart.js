@@ -1,32 +1,46 @@
-const cartItems = JSON.parse(localStorage.getItem('addedItem'));
-function displayCards (){
+const cartItems = JSON.parse(localStorage.getItem('addedItem')) || [];
+
+function displayCards() {
   const displayArea = document.querySelector('#displayCards');
-  for (eachItem of cartItems){
-    console.log(eachItem);
+  displayArea.innerHTML = ''; // Clear previous content
+  
+  cartItems.forEach((itemHTML, index) => {
     const cartDiv = document.createElement('div');
-    cartDiv.innerHTML = eachItem;
+    cartDiv.innerHTML = itemHTML;
+    cartDiv.setAttribute('data-index', index); // Add an index for identification
     displayArea.appendChild(cartDiv);
 
-  const deleteBtn = cartDiv.querySelector('#add-cart');
-  deleteBtn.setAttribute ('class', 'red');
-  deleteBtn.innerText = 'Remove Item';
+    const deleteBtn = cartDiv.querySelector('#add-cart');
+    if (deleteBtn) {
+      deleteBtn.setAttribute('class', 'red');
+      deleteBtn.innerText = 'Remove Item';
+    }
+  });
+}
+
+function deleteItem(e) {
+  if (e.target.getAttribute('id') === 'add-cart') {
+    const cartDiv = e.target.closest('div[data-index]');
+    
+    if (cartDiv) {
+      const index = cartDiv.getAttribute('data-index'); // Get the index of the item
+      
+      // Remove the item from the cartItems array
+      const updatedCartItems = cartItems.filter((_, i) => i !== parseInt(index, 10));
+      localStorage.setItem('addedItem', JSON.stringify(updatedCartItems));
+      
+      // Update the cartItems variable
+      cartItems.length = 0; // Clear the current array
+      cartItems.push(...updatedCartItems); // Update the array
+
+      // Remove the item from the display
+      cartDiv.remove();
+    }
   }
-};
+}
 
-function deleteItem (e){
-  
-  if(e.target.getAttribute('id') == 'add-cart'){
-    console.log(e.target);
-    //KEEP EVERYTHING INSIDE THE IF STATEMENT
-    //remove from local storage array - the array is initialized in line 1
-    //brin in display area - look at line 3
-    //remove from display - look up how to remove from parent elemenents
-    //updated local storage array - look at line 103 in logic.js file
-  }};
-
-window.onload = function (){
+window.onload = function() {
   displayCards();
   const displayArea = document.querySelector('#displayCards');
-  displayArea.addEventListener('click',deleteItem);
+  displayArea.addEventListener('click', deleteItem);
 };
-
