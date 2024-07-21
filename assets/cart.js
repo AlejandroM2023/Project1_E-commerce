@@ -17,6 +17,15 @@ function deleteItem (e){
   
   if(e.target.getAttribute('id') == 'add-cart'){
     console.log(e.target);
+    function removeItemFromCart () {
+      fetch('https://fakestoreapi.com/carts/1/items/${add-cart}',{
+        method:"DELETE"
+    })
+
+        .then(res=>res.json())
+        .then(data=>console.log(`Item removed:`, data));
+    };
+    
     //KEEP EVERYTHING INSIDE THE IF STATEMENT
     //remove from local storage array - the array is initialized in line 1
     //brin in display area - look at line 3
