@@ -18,6 +18,7 @@ function displayCards() {
   });
 }
 
+
 function deleteItem(e) {
   if (e.target.getAttribute('id') === 'add-cart') {
     const cartDiv = e.target.closest('div[data-index]');
